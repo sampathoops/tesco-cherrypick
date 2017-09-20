@@ -11,7 +11,7 @@ class Home extends Component {
     render(){
         return (<div>
                   <div className="logo"></div>
-                  <div className="headline">Smart Shopping</div><br/>
+                  <div className="headline">Smart Shopping2.0</div><br/>
                   <div className="description">Say hello to hassle-free shopping! Share your shopping list and cherrypick sets up everything for a fast shopping experience in store!</div>
                   
                   <div className="button-container">
