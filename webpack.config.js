@@ -47,18 +47,7 @@ var config = {
   watch: true,
   resolveLoader: {
     moduleExtensions: ['-loader']
-  },
-  plugins: [
-    new UglifyJSPlugin({
-      minimize: true,
-      compress: true
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    })
-  ]
+  }
 };
 
 module.exports = config;
