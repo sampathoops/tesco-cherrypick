@@ -10,8 +10,8 @@ class Shop extends Component {
         console.log(content);
       });
       Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-          scanner.start(cameras[0]);
+        if (cameras.length > 1) {
+          scanner.start(cameras[1]);
         } else {
           console.error('No cameras found.');
         }
