@@ -61,9 +61,10 @@ function findShortestPath(zoneMap) {
         for(i=0; i<zoneMap[nearestZone].length; i++) {
           productStr += zoneMap[nearestZone][i].product + ',';
         }
-        $('#selfieMsg').html('Please pick up '+productStr.substring(0,productStr.length-1));
-        setTimeout(function() {$('#shoppingList').html('<img class="arrow-image" src="img/'+arrow+'.png"/>');}, 2000);
+        $('#selfieMsg').html('Please pick up '+productStr.substring(0,productStr.length-1)+' from immediate next shelf');
+        $('#shoppingList').html('<img class="arrow-image" src="img/'+arrow+'.png"/>');
         $('#preview').show();
+        $('.btn').html('<span>Next</span>');
 
 
     });

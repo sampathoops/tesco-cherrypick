@@ -4,6 +4,15 @@ import { Link } from 'react-router-dom';
 
 class Shop extends Component {
 
+    constructor(props) {
+      super(props);
+      this.computeNextPath = this.computeNextPath.bind(this)
+    }
+
+    computeNextPath() {
+      window.shortestPath();
+    }
+
     componentDidMount(){
 
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
@@ -32,12 +41,11 @@ class Shop extends Component {
             }
         });*/
       scanner.addListener('scan', function (content) {
-        alert(content);
+        // alert(content);
 
-
-        window.currentMarker = content.replace('https://cherrypickapp.herokuapp.com/pickiuproute','');
+        debugger;
+        window.currentMarker = content.replace('https://cherrypickapp.herokuapp.com/pickuproute','');
         sessionStorage.setItem('current-marker',currentMarker);
-        window.shortestPath();
         $('#preview').hide();
         $('#selfieMsg').html("Welcome to Tesco star daily! Here's your shopping list. Click 'Cherrypick' to begin picking items");
           $('.btn').show();
@@ -59,11 +67,10 @@ class Shop extends Component {
               }
           });
 
-        $('.btn').show();
       });
       Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 1) {
-          scanner.start(cameras[1]);
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
         } else {
           console.error('No cameras found.');
         }
@@ -81,7 +88,7 @@ class Shop extends Component {
             </div>
           </div>
 
-          <a className="btn" href="/shop" style={{margin: '24px auto 0px', zIndex: '0',display:'none'}}><span>Cherrypick</span></a>
+          <div className="btn bottom-button" style={{position: 'fixed', bottom: '20px'}} href="/shop" onClick={(e) => this.computeNextPath()} style={{margin: '24px auto 0px', zIndex: '0',display:'none'}}><span>Cherrypick</span></div>
 
         <div id="tabs" style={{display:'none',position: 'fixed',width:'100%',top:'0px',left:'0px',height:'70px',textAlign:'center',padding:'22px'}}>
 
