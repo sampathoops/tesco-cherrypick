@@ -14,6 +14,10 @@ app.get('/share-list', function(request, response) {
   response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
 });
 
+app.get('/shop', function(request, response) {
+  response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
+});
+
 app.get('/fit-test', function(request, response) {
   response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
 });
