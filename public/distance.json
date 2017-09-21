@@ -1,0 +1,18 @@
+[
+{"marker": 4,"zone": 1,"distance":0},
+{"marker": 4,"zone": 2,"distance":1},
+{"marker": 4,"zone": 3,"distance":3},
+{"marker": 4,"zone": 11,"distance":2},
+{"marker": 4,"zone": 12,"distance":4},
+
+{"marker": 3,"zone": 4,"distance":0 },
+{"marker": 3,"zone": 5,"distance":1 },
+{"marker": 3,"zone": 10,"distance":2 },
+{"marker": 3,"zone": 6,"distance":3 },
+{"marker": 3,"zone": 12,"distance":3 },
+
+{"marker": 2,"zone": 6,"distance":0 },
+{"marker": 2,"zone": 7,"distance":1 },
+{"marker": 2,"zone": 8,"distance":2 },
+{"marker": 2,"zone": 5,"distance":4 }
+]

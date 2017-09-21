@@ -18,6 +18,22 @@ app.get('/shop', function(request, response) {
   response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
 });
 
+app.get('/route1', function(request, response) {
+  response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
+});
+
+app.get('/route2', function(request, response) {
+  response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
+});
+
+app.get('/route3', function(request, response) {
+  response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
+});
+
+app.get('/route4', function(request, response) {
+  response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
+});
+
 app.get('/fit-test', function(request, response) {
   response.sendFile(path.resolve(__dirname, 'public', 'steps.html'));
 });

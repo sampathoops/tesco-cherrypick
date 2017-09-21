@@ -7,14 +7,18 @@ class Shop extends Component {
     componentDidMount(){
 
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-      scanner.addListener('scan', function (content) {
-        alert(content);
-
-        $('#selfieMsg').html("Welcome to Tesco star daily! Here's your shopping list. Click 'Cherrypick' to begin picking items");
+      let content = 'https://cherrypickapp.herokuapp.com/pickiuproute4';//todo: remove hardcoding and use 'content' variable
+      /*window.currentMarker = content.replace('https://cherrypickapp.herokuapp.com/pickiuproute','');
+        sessionStorage.setItem('current-marker',currentMarker);
+      window.shortestPath();
+      $('#preview').hide();
+      $('#selfieMsg').html("Welcome to Tesco star daily! Here's your shopping list. Click 'Cherrypick' to begin picking items");
         $('.btn').show();
         
         $.get(JSON.parse(sessionStorage.getItem('shopping-list')).uri, function(data, textStatus, jqXHR) {
             console.log('data: ', data);
+            window.shoppingList = data.list;
+            sessionStorage.setItem('shopping-list-data',JSON.stringify(shoppingList));
             debugger;
               for(var i=0;i<data.list.length;i++){
                 debugger;
@@ -26,7 +30,34 @@ class Shop extends Component {
               });
 
             }
-        });
+        });*/
+      scanner.addListener('scan', function (content) {
+        alert(content);
+
+
+        window.currentMarker = content.replace('https://cherrypickapp.herokuapp.com/pickiuproute','');
+        sessionStorage.setItem('current-marker',currentMarker);
+        window.shortestPath();
+        $('#preview').hide();
+        $('#selfieMsg').html("Welcome to Tesco star daily! Here's your shopping list. Click 'Cherrypick' to begin picking items");
+          $('.btn').show();
+          
+          $.get(JSON.parse(sessionStorage.getItem('shopping-list')).uri, function(data, textStatus, jqXHR) {
+              console.log('data: ', data);
+              window.shoppingList = data.list;
+              sessionStorage.setItem('shopping-list-data',JSON.stringify(shoppingList));
+              debugger;
+                for(var i=0;i<data.list.length;i++){
+                  debugger;
+                  fetch(`https://pixabay.com/api/?key=6502773-b63784a2647c85d2c0d01e277&q=${data.list[i]}&image_type=photo&pretty=true`)
+                  .then(response => response.json())
+                  .then(result => {
+                    debugger;
+                    $("#shoppingList").append(`<img class='searched-image-shop' src=${result.hits[0].previewURL}></img>`);
+                });
+
+              }
+          });
 
         $('.btn').show();
       });
