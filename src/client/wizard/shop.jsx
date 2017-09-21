@@ -5,17 +5,30 @@ import { Link } from 'react-router-dom';
 class Shop extends Component {
 
     componentDidMount(){
-      
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) {
+        console.log(content);
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
     }
     render(){
         return (<div className="contentShop" style={{minHeight:'100vh',width:'100%'}}>
-          
+          <div id="selfieMsg" style={{width:'300px',margin:'0 auto'}}>Scan the QR code sticker on the shop floor entrance to begin your shopping journey.</div>
+          <video id="preview"></video>
           <div className="products">
             <div className="product" id="product">
             </div>
           </div>
 
-        <div id="tabs" style={{display:'inline',position: 'fixed',width:'100%',top:'0px',left:'0px',height:'70px',textAlign:'center',padding:'22px'}}>
+        <div id="tabs" style={{display:'none',position: 'fixed',width:'100%',top:'0px',left:'0px',height:'70px',textAlign:'center',padding:'22px'}}>
 
 
         <div id="tabs-container">
