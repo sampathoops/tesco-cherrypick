@@ -1,6 +1,39 @@
 function shortestPath() {
   console.log('shortestPath');
-  getProductZones(groupProductZones);
+  if($('.btn').html() == '<span>Next</span>') {
+    getNextMarker();
+  } else {
+    getProductZones(groupProductZones);
+  }
+}
+
+function getNextMarker() {
+  console.log('in getNextMarker:', window.zoneMap);
+  var nextZone = Object.keys(window.zoneMap)[0];
+  debugger;
+  $.get("./distanceToMarker.json", function(data, status){
+    for(var i=0;i<data.length;i++) {
+        if(nextZone==data[i].zone) {
+          if(data[i].marker == sessionStorage.getItem('current-marker')) {
+            var productStr = '';
+            for(j=0; j<window.zoneMap[nextZone].length; j++) {
+              productStr += window.zoneMap[nextZone][j].product + ',';
+            }
+            $('#selfieMsg').html('Please pick up '+productStr.substring(0,productStr.length-1)+' from immediate next shelf');
+            $('#shoppingList').html('<img class="arrow-image" src="img/straight.png"/>');
+            $('#preview').show();
+            $('.btn').html('<span>Next</span>');
+          } else {
+              
+                if(nextZone==data[i].zone) {
+                  var marker = data[i].marker;
+                  sessionStorage.setItem('current-marker', marker);
+                }
+              
+          }
+        }
+    }
+  });
 }
 
 function groupProductZones(productZones){
@@ -15,6 +48,7 @@ function groupProductZones(productZones){
       zoneMap[productZones[i].zone].push(productZones[i]);
     }
   }
+  window.zoneMap = zoneMap;
   findShortestPath(zoneMap);
 }
 
@@ -65,7 +99,8 @@ function findShortestPath(zoneMap) {
         $('#shoppingList').html('<img class="arrow-image" src="img/'+arrow+'.png"/>');
         $('#preview').show();
         $('.btn').html('<span>Next</span>');
-
+        delete window.zoneMap[nearestZone];
+        window.currentZone = nearestZone;
 
     });
 
@@ -78,7 +113,7 @@ function getProductZones(cb) {
   $.get("./products.json", function(data, status){
       for(var i=0; i<shoppingList.length; i++) {
         for(var j=0; j<data.length; j++) {
-          if(data[j].product.toLowerCase() == shoppingList[i]) {
+          if(data[j].product.toLowerCase() == shoppingList[i].toLowerCase()) {
             productZones.push(data[j]);
           }
         }
